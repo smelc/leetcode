@@ -1,4 +1,4 @@
-let merge_nodes_between_zeros() =
+let _merge_nodes_between_zeros() =
   let print_it (l : int list) : string = 
     let rec go_print = function
         | [] -> ""
@@ -23,6 +23,30 @@ let merge_nodes_between_zeros() =
   print_endline @@ print_it l;
   print_endline @@ print_it @@ go_first l
 
+let average_waiting_time (l: (int * int) list) : float = 
+  let rec go (current_time:float) (l: (int * int) list) acc : float list =
+    match l with
+      | [] -> acc
+      | (arrival_time, prep_time) :: l_rest ->
+        let current_time: float = Float.(max current_time @@ of_int arrival_time) in
+        let finish_time: float = Float.(add current_time @@ of_int prep_time) in
+        let waiting_time: float = Float.(sub finish_time @@ of_int arrival_time) in
+        go finish_time l_rest (waiting_time :: acc)
+    in
+  let rec sum_floats = function
+    | [] -> 0.0
+    | f :: rest -> Float.add f @@ sum_floats rest in
+  let float_waiting_times: float list = go 0.0 l [] in
+  Float.(div (sum_floats float_waiting_times) (Float.of_int @@ List.length float_waiting_times))
+
+let _float_list_to_string l =
+  let rec go = function
+    | [] -> ""
+    | [f] -> Float.to_string f
+    | f :: l_rest -> Float.to_string f ^ go l_rest in
+  "[" ^ go l ^ "]"
+
 let () = 
-  merge_nodes_between_zeros();
+  (* _merge_nodes_between_zeros(); *)
+  print_endline @@ Float.to_string @@ average_waiting_time [(5,2); (5,4); (10,3); (20,1)];
   print_endline "Hello, World!"
