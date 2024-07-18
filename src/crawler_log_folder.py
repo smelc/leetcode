@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     def minOperations(self, logs: List[str]) -> int:
         result = 0
@@ -11,4 +12,4 @@ class Solution:
                     pass
                 case _:
                     result += 1
-        return result 
+        return result

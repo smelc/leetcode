@@ -36,6 +36,7 @@ class Solution:
         # print(previous_longest)
         return len(previous_longest)
 
+
 if __name__ == "__main__":
     print(Solution().lengthOfLongestSubstring("abcabcbb"))
     print(Solution().lengthOfLongestSubstring("bbbb"))

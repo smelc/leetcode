@@ -1,9 +1,10 @@
 from typing import Any, Optional
 
+
 class Chunk:
 
     prefix: Optional[str]
-    nested: Optional[Any] # str or Chunk
+    nested: Optional[Any]  # str or Chunk
     suffix: Optional[str]
 
     def __init__(self, prefix, nested, suffix):
@@ -34,9 +35,10 @@ class Chunk:
             result = s[i] + result
         return result
 
+
 class Solution:
     def reverseParentheses(self, s: str) -> str:
-        s = s.replace("()", "") # hacky
+        s = s.replace("()", "")  # hacky
 
         start = 0
         end = len(s) - 1
@@ -57,15 +59,15 @@ class Solution:
 
             while (parse_start or parse_end) and start < end:
                 if parse_start:
-                    start_char=s[start]
-                    start+=1
+                    start_char = s[start]
+                    start += 1
                     if start_char == "(":
                         parse_start = False
                     else:
-                        start_str+=start_char
+                        start_str += start_char
                 if parse_end:
-                    end_char=s[end]
-                    end-=1
+                    end_char = s[end]
+                    end -= 1
                     if end_char == ")":
                         parse_end = False
                     else:
@@ -86,6 +88,7 @@ class Solution:
         print(result)
 
         return result
+
 
 if __name__ == "__main__":
     assert Solution().reverseParentheses("(u(love)i)") == "iloveu"
